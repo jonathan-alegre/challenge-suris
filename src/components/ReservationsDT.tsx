@@ -33,9 +33,9 @@ function ReservationsDT() {
       <DataTable data={tableData} className="display">
         <thead>
           <tr>
-            <th>Servicio</th>
-            <th>Horario</th>
-            <th>Cliente</th>
+            <th className="text-center">Servicio</th>
+            <th  className="text-center">Día y Horario</th>
+            <th  className="text-center">Cliente</th>
           </tr>
         </thead>
       </DataTable>
