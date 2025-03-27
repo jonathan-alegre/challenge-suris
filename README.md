@@ -1,6 +1,6 @@
 # Challenge Técnico Suris: Front End (React)
 
-Este proyecto react fue creado con Vite.
+Este proyecto react fue creado con la build tool Vite.
 
 Para ejecutarlo se deben seguir los siguientes pasos:
 - Clonar en repositorio local con cualquier herramienta de Git o Visual Studio Code.
