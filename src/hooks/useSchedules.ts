@@ -5,16 +5,13 @@ export const useSchedules = () => {
 
   const [schedules, setSchedules] = useState([]);
 
-  const fetchSchedulesByService = async (serviceId) => {
-    console.log('fetch schedule', serviceId);
-
+  const fetchSchedulesByService = async (serviceId) => {    
     if (serviceId != '') {
       try {
         const urlGetSchedules = `https://localhost:${port}/api/schedule/GetByService/${serviceId}`;
         const response = await fetch(urlGetSchedules);
         const data = await response.json();
-        if (data.length > 0) {
-          console.log("data schedules", data);
+        if (data.length > 0) {          
           setSchedules(data);
         }
       } catch (error) {

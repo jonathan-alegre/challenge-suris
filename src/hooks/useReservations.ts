@@ -17,8 +17,7 @@ export const useReservations = () => {
       const response = await fetch(urlGetReservations);
       const data = await response.json();
 
-      if (data.length > 0) {
-        console.log("data", data);
+      if (data.length > 0) {        
         setReservations(data);
       }
       setIsLoading(false);
@@ -43,15 +42,14 @@ export const useReservations = () => {
         .then(function (response) {
           return response.json();
         })
-        .then(function (data) {
-          console.log(data);
+        .then(function (data) {          
           setPostMessage(data.message);    
           setPostSuccess(data.isSuccess);
         });
         
         setIsLoading(false);
     } catch (error) {
-      console.log(error);
+      console.error("Ha ocurrido un error", error);
     }
   };
 

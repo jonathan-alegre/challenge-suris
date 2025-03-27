@@ -11,8 +11,7 @@ export const useServices = () => {
     try {      
       const response = await fetch(urlGetServices);      
       const data = await response.json();      
-      if (data.length > 0) {
-        console.log('data services', data);        
+      if (data.length > 0) {        
         setServices(data);        
       }       
     } catch (error) {

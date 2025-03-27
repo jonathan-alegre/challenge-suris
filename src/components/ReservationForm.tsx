@@ -20,13 +20,11 @@ function ReservationForm() {
   const { postReservation, postMessage, postSuccess, isLoading } =
     useReservations();
 
-  const selectSchedule = (scheduleId) => {
-    console.log("scheduleId", scheduleId);
+  const selectSchedule = (scheduleId) => {    
     setScheduleId(scheduleId);
   };
 
-  const selectService = (serviceId) => {
-    console.log("serviceId", serviceId);
+  const selectService = (serviceId) => {    
     setServiceId(serviceId);
   };
 
