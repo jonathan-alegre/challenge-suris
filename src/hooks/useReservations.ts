@@ -5,7 +5,7 @@ export const useReservations = () => {
   const port = "7152";
 
   const [reservations, setReservations] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const [postMessage, setPostMessage] = useState(""); 
   const [postSuccess, setPostSuccess] = useState(false);
 
