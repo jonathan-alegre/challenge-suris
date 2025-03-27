@@ -51,8 +51,7 @@ function ReservationForm() {
               <label className="control-label pt-2">Servicio</label>
             </div>
             <div className="col-10 pb-3">
-              <ServicesSelect selectService={selectService}></ServicesSelect>
-              <span className="text-danger"></span>
+              <ServicesSelect selectService={selectService}></ServicesSelect>              
             </div>
             <div className="col-2">
               <label className="control-label pt-2">Fecha y Horario</label>
@@ -61,8 +60,7 @@ function ReservationForm() {
               <SchedulesSelect
                 selectSchedule={selectSchedule}
                 serviceId={serviceId}
-              ></SchedulesSelect>
-              <span className="text-danger"></span>
+              ></SchedulesSelect>            
             </div>
             <div className="col-2">
               <label className="control-label pt-2">Cliente</label>
@@ -74,13 +72,12 @@ function ReservationForm() {
                 name="clientName"
                 value={clientName}
                 onChange={onInputChange}
-              />
-              <span className="text-danger"></span>
+              />              
             </div>
             <div className="offset-4 col-4">
               <input
                 type="submit"
-                value="Guardar"
+                value="Reservar"
                 className="btn btn-success form-control"
               />
             </div>
