@@ -1,4 +1,4 @@
-# Challenge Técnico Suris: Front End (React)
+# Challenge Técnico Suris Code: Front End (React)
 
 Este proyecto react fue creado con la build tool Vite.
 
