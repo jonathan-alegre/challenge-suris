@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import ServiceReservationDT from "../components/ServiceReservationDT";
-import service from "../components/ServiceReservationDT";
+import service from "../components/ReservationsDT";
+import ReservationsDT from "../components/ReservationsDT";
 
 function ReservationList() {
   return (
@@ -11,7 +11,7 @@ function ReservationList() {
             <button >Nueva Reserva</button>
           </Link>
         </div>
-        <ServiceReservationDT></ServiceReservationDT>
+        <ReservationsDT></ReservationsDT>
       </div>
     </>
   );
