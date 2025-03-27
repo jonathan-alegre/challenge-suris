@@ -2,13 +2,16 @@ import { useEffect } from "react";
 import { useSchedules } from "../hooks/useSchedules";
 import useForm from "../hooks/useForm.js";
 
-function SchedulesSelect({ selectSchedule }) {
-  const { schedules, fetchSchedules } = useSchedules();
+function SchedulesSelect({ selectSchedule, serviceId }) {
+  const { schedules, fetchSchedulesByService } = useSchedules();
 
   useEffect(() => {
-    fetchSchedules();
+    
   }, []);
-  
+
+  useEffect(() => {    
+      fetchSchedulesByService(serviceId);    
+  }, [serviceId]);
 
   return (
     <>
@@ -16,8 +19,8 @@ function SchedulesSelect({ selectSchedule }) {
         required
         name="servicios"
         id="servicios"
-        className="form-control"      
-        onChange={(event)=> selectSchedule(event.target.value)}        
+        className="form-control"
+        onChange={(event) => selectSchedule(event.target.value)}
       >
         <option value=""></option>
         {schedules.map((schedule, id) => (

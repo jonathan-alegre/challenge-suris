@@ -14,8 +14,8 @@ function ReservationForm() {
   const { formState, onInputChange } = useForm(initialForm);
   const { clientName } = formState;
 
-  const [scheduleId, setScheduleId] = useState(1);
-  const [serviceId, setServiceId] = useState(1);
+  const [scheduleId, setScheduleId] = useState();
+  const [serviceId, setServiceId] = useState();
 
   const { postReservation, postMessage, postSuccess, isLoading } =
     useReservations();
@@ -62,6 +62,7 @@ function ReservationForm() {
             <div className="col-10 pb-3">
               <SchedulesSelect
                 selectSchedule={selectSchedule}
+                serviceId={serviceId}
               ></SchedulesSelect>
               <span className="text-danger"></span>
             </div>
