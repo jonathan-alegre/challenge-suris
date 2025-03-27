@@ -18,7 +18,7 @@ function ReservationsDT() {
   useEffect(() => {    
       setTableData(reservations.map((service) => [
         service.service.name,
-        service.schedule.dateTime,
+        new Date(service.schedule.dateTime).toLocaleString(),
         service.clientName
       ]));    
   }, [reservations])

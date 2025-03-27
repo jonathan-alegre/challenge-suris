@@ -1,55 +1,65 @@
 import useForm from "../hooks/useForm.js";
-import { NewsList } from "../components/NewsList.jsx";
-
 
 function Reservation() {
   const initialForm = {
-    fechaDesde: "",
-    fechaHasta: "",
-    palabrasClave: "",
+    cliente: "",
   };
 
   const { formState, onInputChange } = useForm(initialForm);
-  const { fechaDesde, fechaHasta, palabrasClave } = formState;
+  const { cliente } = formState;
 
   return (
-    <div className="container">      
-      <hr />
-      <form className="row g-3">
-        <div className="col-sm-7">
-          <input
-            type="text"
-            className="form-control"
-            name="fechaDesde"
-            placeholder="Fecha Desde"
-            value={fechaDesde}
-            onChange={onInputChange}
-          />
+    <div className="card offset-3 col-md-6">
+      <div className="card-header">
+        <h3>Nueva Reserva</h3>
+      </div>
+      <div className="card-body">
+        <div className="row py-md-1 offset-3">
+          <div className="d-flex flex-row">
+            <div className="p-2">Servicios</div>
+            <select
+              name="servicios"
+              id="servicios"
+              className="form-select w-auto"
+            >
+              <option value="1">Limpieza</option>
+            </select>
+          </div>
         </div>
-        <div className="col-sm">
-          <input
-            type="text"
-            className="form-control"
-            name="palabrasClave"
-            placeholder="Palabras Claves"
-            value={palabrasClave}
-            onChange={onInputChange}
-          />
+
+        <div className="row py-md-1 offset-3">
+          <div className="d-flex flex-row">
+            <div className="p-2">Horarios</div>
+            <select
+              name="horarios"
+              id="horarios"
+              className="form-select w-auto"
+            >
+              <option value="1">08:00</option>
+            </select>
+          </div>
         </div>
-        <div>
-          <input
-            type="text"
-            className="form-control"
-            name="fechaHasta"
-            placeholder="Fecha Hasta"
-            value={fechaHasta}
-            onChange={onInputChange}
-          />
+
+        <div className="row py-md-1 offset-3">
+          <div className="d-flex flex-row">
+            <div className="p-2">Cliente</div>
+            <div>
+              <input
+                type="text"
+                className="form-control"
+                name="cliente"
+                placeholder="Nombre Cliente"
+                value={cliente}
+                onChange={onInputChange}
+              />
+            </div>
+          </div>
         </div>
-      </form>      
+      </div>
+      <div className="col-md-6"></div>
+      <div className="col-md-6"></div>
     </div>
   );
-};
-
+}
 
 export default Reservation;
