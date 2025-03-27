@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 function NavBar() {
   return (
     <>
-      <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <nav className="navbar navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
         <div className="container-fluid">
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
@@ -13,7 +13,7 @@ function NavBar() {
                   className="nav-link active"
                   aria-current="page"
                 >
-                  Reservas
+                  <h5>Listado Reservas</h5>
                 </NavLink>
               </li>              
             </ul>

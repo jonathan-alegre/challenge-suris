@@ -1,4 +1,9 @@
+import { Link } from "react-router-dom";
 import useForm from "../hooks/useForm.js";
+import ServicesSelect from "../components/ServicesSelect.js";
+import SchedulesSelect from "../components/SchedulesSelect.js";
+import { useEffect, useState } from "react";
+import { useServices } from "../hooks/useServices";
 
 function Reservation() {
   const initialForm = {
@@ -8,56 +13,69 @@ function Reservation() {
   const { formState, onInputChange } = useForm(initialForm);
   const { cliente } = formState;
 
+  const [scheduleId, setScheduleId] = useState(1);
+  const [serviceId, setServiceId] = useState(1);
+
+  function selectSchedule(scheduleId) {
+    console.log("scheduleId", scheduleId);
+    setScheduleId(scheduleId);
+  }
+
+  function selectService(serviceId) {
+    console.log("serviceId", serviceId);
+    setServiceId(serviceId);
+  }
+
   return (
-    <div className="card offset-3 col-md-6">
-      <div className="card-header">
-        <h3>Nueva Reserva</h3>
-      </div>
-      <div className="card-body">
-        <div className="row py-md-1 offset-3">
-          <div className="d-flex flex-row">
-            <div className="p-2">Servicios</div>
-            <select
-              name="servicios"
-              id="servicios"
-              className="form-select w-auto"
+    <div className="container border p-3">
+      <h1 className="text-center">Nueva Reserva</h1>
+      <hr />
+      <div className="row">
+        <div className="col-2">
+          <label className="control-label pt-2">Servicio</label>
+        </div>
+        <div className="col-10 pb-3">
+          <ServicesSelect selectService={selectService}></ServicesSelect>
+          <span className="text-danger"></span>
+        </div>
+        <div className="col-2">
+          <label className="control-label pt-2">Fecha y Horario</label>
+        </div>
+        <div className="col-10 pb-3">
+          <SchedulesSelect selectSchedule={selectSchedule}></SchedulesSelect>
+          <span className="text-danger"></span>
+        </div>
+        <div className="col-2">
+          <label className="control-label pt-2">Cliente</label>
+        </div>
+        <div className="col-10 pb-3">
+          <input
+            className="form-control"
+            name="cliente"
+            value={cliente}
+            onChange={onInputChange}
+          />
+          <span className="text-danger"></span>
+        </div>
+        <div className="col-5 offset-2">
+          <Link to="/reservations">
+            <button
+              className="btn-primary btn form-control "
+              asp-controller="Coupon"
+              asp-action="CouponIndex"
             >
-              <option value="1">Limpieza</option>
-            </select>
-          </div>
+              Volver a Reservas
+            </button>
+          </Link>
         </div>
-
-        <div className="row py-md-1 offset-3">
-          <div className="d-flex flex-row">
-            <div className="p-2">Horarios</div>
-            <select
-              name="horarios"
-              id="horarios"
-              className="form-select w-auto"
-            >
-              <option value="1">08:00</option>
-            </select>
-          </div>
-        </div>
-
-        <div className="row py-md-1 offset-3">
-          <div className="d-flex flex-row">
-            <div className="p-2">Cliente</div>
-            <div>
-              <input
-                type="text"
-                className="form-control"
-                name="cliente"
-                placeholder="Nombre Cliente"
-                value={cliente}
-                onChange={onInputChange}
-              />
-            </div>
-          </div>
+        <div className="col-5">
+          <input
+            type="submit"
+            value="Guardar"
+            className="btn btn-success form-control"
+          />
         </div>
       </div>
-      <div className="col-md-6"></div>
-      <div className="col-md-6"></div>
     </div>
   );
 }

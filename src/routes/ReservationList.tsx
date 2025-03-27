@@ -8,7 +8,7 @@ function ReservationList() {
       <div className="container">
         <div className="d-flex flex-row-reverse">
           <Link to="/reservation">
-            <button >Nueva Reserva</button>
+            <button className="btn btn-success form-control">Nueva Reserva</button>
           </Link>
         </div>
         <ReservationsDT></ReservationsDT>
