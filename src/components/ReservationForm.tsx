@@ -70,6 +70,7 @@ function ReservationForm() {
             </div>
             <div className="col-10 pb-3">
               <input
+                required 
                 className="form-control"
                 name="clientName"
                 value={clientName}

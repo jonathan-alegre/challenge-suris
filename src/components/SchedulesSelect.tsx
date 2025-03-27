@@ -13,11 +13,13 @@ function SchedulesSelect({ selectSchedule }) {
   return (
     <>
       <select
+        required
         name="servicios"
         id="servicios"
         className="form-control"      
         onChange={(event)=> selectSchedule(event.target.value)}        
       >
+        <option value=""></option>
         {schedules.map((schedule, id) => (
           <option key={id} value={schedule.scheduleId}>
             {new Date(schedule.dateTime).toLocaleString()}

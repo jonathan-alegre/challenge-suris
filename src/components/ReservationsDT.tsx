@@ -19,7 +19,8 @@ function ReservationsDT() {
       setTableData(reservations.map((service) => [
         service.service.name,
         new Date(service.schedule.dateTime).toLocaleString(),
-        service.clientName
+        service.clientName,        
+        new Date(service.creationDate).toLocaleString(),
       ]));    
   }, [reservations])
 
@@ -36,6 +37,7 @@ function ReservationsDT() {
             <th className="text-center">Servicio</th>
             <th  className="text-center">Día y Horario</th>
             <th  className="text-center">Cliente</th>
+            <th  className="text-center">Fecha Alta</th>
           </tr>
         </thead>
       </DataTable>
