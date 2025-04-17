@@ -1,44 +1,33 @@
-import { useEffect } from "react";
-import { useSchedules } from "../hooks/useSchedules";
-import { useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-
-interface Schedule {
-  scheduleId: number;
-  dateTime: string;
-}
+import { useSelector } from "react-redux";
+import { RootState } from "../store/store";
+import { useGetSchedulesByServiceQuery } from "../store/apiSlice";
 
 interface SchedulesSelectProps {
   selectSchedule: (scheduleId: number) => void;
 }
 
 function SchedulesSelect({ selectSchedule }: SchedulesSelectProps) {
-  const { schedules, fetchSchedulesByService } = useSchedules();
   const selectedServiceId = useSelector((state: RootState) => state.service.selectedServiceId);
+  const { data: schedules, isFetching, error } = useGetSchedulesByServiceQuery(selectedServiceId!, {
+    skip: !selectedServiceId,
+  });
 
-  useEffect(() => {    
-    if (selectedServiceId) {
-      fetchSchedulesByService(selectedServiceId);
-    }
-  }, [selectedServiceId]);
+  if (isFetching) return <div>Cargando horarios...</div>;
+  if (error) return <div>Error al cargar horarios</div>;
+  if (!schedules) return <div>No hay horarios disponibles</div>;
 
   return (
-    <>
-      <select
-        required
-        name="servicios"
-        id="servicios"
-        className="form-control"
-        onChange={(event) => selectSchedule(Number(event.target.value))}
-      >
-        <option value=""></option>
-        {schedules.map((schedule: Schedule, id: number) => (
-          <option key={id} value={schedule.scheduleId}>
-            {new Date(schedule.dateTime).toLocaleString()}
-          </option>
-        ))}
-      </select>
-    </>
+    <select
+      className="form-control"
+      onChange={(e) => selectSchedule(Number(e.target.value))}
+    >
+      <option value=""></option>
+      {schedules.map((schedule) => (
+        <option key={schedule.id} value={schedule.id}>
+          {new Date(schedule.dateTime).toLocaleString()}
+        </option>
+      ))}
+    </select>
   );
 }
 
