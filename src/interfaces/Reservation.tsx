@@ -1,5 +1,10 @@
 export interface Reservation {
-    serviceId: number,
-    scheduleId: number,
-    clientName: string
-}
+    service: {
+      name: string;
+    };
+    schedule: {
+      dateTime: string;
+    };
+    clientName: string;
+    creationDate: string;
+  }

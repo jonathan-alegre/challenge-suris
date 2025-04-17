@@ -4,7 +4,7 @@ import { Reservation } from "../interfaces/Reservation";
 export const useReservations = () => {
   const port = "7152";
 
-  const [reservations, setReservations] = useState([]);
+  const [reservations, setReservations] = useState<Reservation[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [postMessage, setPostMessage] = useState(""); 
   const [postSuccess, setPostSuccess] = useState(false);

@@ -7,7 +7,7 @@ import loading from "../assets/loading.gif";
 function ReservationsDT() {
   DataTable.use(DT);
 
-  const [tableData, setTableData] = useState([]);
+  const [tableData, setTableData] = useState<(string | number)[][]>([]);
 
   const { reservations, fetchReservations, isLoading } = useReservations();
 
@@ -16,12 +16,14 @@ function ReservationsDT() {
   }, []);
 
   useEffect(() => {    
+    if (reservations.length > 0) {
       setTableData(reservations.map((service) => [
         service.service.name,
         new Date(service.schedule.dateTime).toLocaleString(),
         service.clientName,        
         new Date(service.creationDate).toLocaleString(),
       ]));    
+    }
   }, [reservations])
 
   return (
