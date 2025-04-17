@@ -1,12 +1,17 @@
 import { useState } from "react";
 
+interface Schedule {
+  scheduleId: number;
+  dateTime: string;
+}
+
 export const useSchedules = () => {
   const port = "7152";
 
-  const [schedules, setSchedules] = useState([]);
+  const [schedules, setSchedules] = useState<Schedule[]>([]);
 
-  const fetchSchedulesByService = async (serviceId) => {    
-    if (serviceId != '') {
+  const fetchSchedulesByService = async (serviceId: number) => {    
+    if (serviceId !== 0) {
       try {
         const urlGetSchedules = `https://localhost:${port}/api/schedule/GetByService/${serviceId}`;
         const response = await fetch(urlGetSchedules);

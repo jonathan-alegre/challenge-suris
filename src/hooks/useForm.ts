@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useState, ChangeEvent } from "react";
 
-function useForm (initialForm = {})  {
-  const [formState, setFormState] = useState(initialForm);  
+interface FormState {
+  [key: string]: string;
+}
 
-  const onInputChange = ( {target}) => {       
+function useForm(initialForm: FormState = {}) {
+  const [formState, setFormState] = useState<FormState>(initialForm);  
+
+  const onInputChange = ({ target }: ChangeEvent<HTMLInputElement>) => {       
     const { name, value } = target;
     setFormState({
       ...formState,
@@ -12,6 +16,6 @@ function useForm (initialForm = {})  {
   };
 
   return { formState, onInputChange };
-};
+}
 
 export default useForm;

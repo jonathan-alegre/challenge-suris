@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IReservation } from "../interfaces/IReservation";
+import { Reservation } from "../interfaces/Reservation";
 
 export const useReservations = () => {
   const port = "7152";
@@ -26,7 +26,7 @@ export const useReservations = () => {
     }
   };
 
-  const postReservation = async (reservation: IReservation) => {
+  const postReservation = async (reservation: Reservation) => {
     const urlPostReservation = `https://localhost:${port}/api/reservation/Post`;
 
     try {      

@@ -1,17 +1,26 @@
 import { useEffect } from "react";
 import { useSchedules } from "../hooks/useSchedules";
-import useForm from "../hooks/useForm.js";
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
-function SchedulesSelect({ selectSchedule, serviceId }) {
+interface Schedule {
+  scheduleId: number;
+  dateTime: string;
+}
+
+interface SchedulesSelectProps {
+  selectSchedule: (scheduleId: number) => void;
+}
+
+function SchedulesSelect({ selectSchedule }: SchedulesSelectProps) {
   const { schedules, fetchSchedulesByService } = useSchedules();
-
-  useEffect(() => {
-    
-  }, []);
+  const selectedServiceId = useSelector((state: RootState) => state.service.selectedServiceId);
 
   useEffect(() => {    
-      fetchSchedulesByService(serviceId);    
-  }, [serviceId]);
+    if (selectedServiceId) {
+      fetchSchedulesByService(selectedServiceId);
+    }
+  }, [selectedServiceId]);
 
   return (
     <>
@@ -20,10 +29,10 @@ function SchedulesSelect({ selectSchedule, serviceId }) {
         name="servicios"
         id="servicios"
         className="form-control"
-        onChange={(event) => selectSchedule(event.target.value)}
+        onChange={(event) => selectSchedule(Number(event.target.value))}
       >
         <option value=""></option>
-        {schedules.map((schedule, id) => (
+        {schedules.map((schedule: Schedule, id: number) => (
           <option key={id} value={schedule.scheduleId}>
             {new Date(schedule.dateTime).toLocaleString()}
           </option>

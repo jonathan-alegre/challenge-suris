@@ -1,11 +1,16 @@
 import { useState } from "react";
 
+interface Service {
+  serviceId: number;
+  name: string;
+}
+
 export const useServices = () => {  
   const port = "7152";
   
   const urlGetServices = `https://localhost:${port}/api/service/Get`;  
   
-  const [services, setServices] = useState([]);  
+  const [services, setServices] = useState<Service[]>([]);  
 
   const fetchServices = async () => {
     try {      

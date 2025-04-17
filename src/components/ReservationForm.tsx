@@ -1,10 +1,11 @@
-import useForm from "../hooks/useForm.js";
-import ServicesSelect from "./ServicesSelect.js";
-import SchedulesSelect from "./SchedulesSelect.js";
-import { useEffect, useState } from "react";
-import { useReservations } from "../hooks/useReservations.js";
-import loading from "../assets/loading.gif";
-import ReservationList from "../routes/ReservationList.js";
+import useForm from "../hooks/useForm";
+import ServicesSelect from "./ServicesSelect";
+import SchedulesSelect from "./SchedulesSelect";
+import { useState, FormEvent } from "react";
+import { useReservations } from "../hooks/useReservations";
+import { Reservation } from "../interfaces/Reservation";
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 function ReservationForm() {
   const initialForm = {
@@ -14,25 +15,22 @@ function ReservationForm() {
   const { formState, onInputChange } = useForm(initialForm);
   const { clientName } = formState;
 
-  const [scheduleId, setScheduleId] = useState();
-  const [serviceId, setServiceId] = useState();
+  const [scheduleId, setScheduleId] = useState<number | undefined>();
+  const selectedServiceId = useSelector((state: RootState) => state.service.selectedServiceId);
 
-  const { postReservation, postMessage, postSuccess, isLoading } =
-    useReservations();
+  const { postReservation, postMessage, postSuccess } = useReservations();
 
-  const selectSchedule = (scheduleId) => {    
+  const selectSchedule = (scheduleId: number) => {    
     setScheduleId(scheduleId);
   };
 
-  const selectService = (serviceId) => {    
-    setServiceId(serviceId);
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const reservation = {
-      serviceId: serviceId,
+    if (!scheduleId || !selectedServiceId) return;
+
+    const reservation: Reservation = {
+      serviceId: selectedServiceId,
       scheduleId: scheduleId,
       clientName: clientName,
     };
@@ -51,7 +49,7 @@ function ReservationForm() {
               <label className="control-label pt-2">Servicio</label>
             </div>
             <div className="col-10 pb-3">
-              <ServicesSelect selectService={selectService}></ServicesSelect>              
+              <ServicesSelect></ServicesSelect>              
             </div>
             <div className="col-2">
               <label className="control-label pt-2">Fecha y Horario</label>
@@ -59,7 +57,6 @@ function ReservationForm() {
             <div className="col-10 pb-3">
               <SchedulesSelect
                 selectSchedule={selectSchedule}
-                serviceId={serviceId}
               ></SchedulesSelect>            
             </div>
             <div className="col-2">
@@ -82,7 +79,7 @@ function ReservationForm() {
               />
             </div>
             <div className="offset-3 col-6">
-              {postSuccess != true ? (
+              {postSuccess !== true ? (
                 <span className="text-danger">{postMessage}</span>
               ) : (
                 <span className="text-success">Reserva generada.</span>
